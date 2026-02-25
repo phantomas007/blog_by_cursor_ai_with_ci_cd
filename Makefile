@@ -23,7 +23,7 @@ RESET  = \033[0m
 
 .PHONY: help run stop restart db-reset \
         console migrate fixtures cache-clear \
-        cs-check cs-fix phpstan lint \
+        cs-check cs-fix phpstan lint test \
         _wait-db
 
 # ─── Help ─────────────────────────────────────────────────────────────────────
@@ -165,6 +165,12 @@ lint: ## Запустить все линтеры (cs-check + phpstan)
 	@$(MAKE) cs-check
 	@$(MAKE) phpstan
 	@echo "$(BOLD)$(GREEN)  ✔ Все проверки пройдены$(RESET)"
+
+test: ## Запустить тесты PHPUnit (когда появятся)
+	@echo "$(CYAN)  → PHPUnit...$(RESET)"
+	@$(BIN)/phpunit --colors=always; \
+	  if [ $$? -eq 0 ]; then echo "$(GREEN)  ✔ Тесты пройдены$(RESET)"; \
+	  else echo "$(RED)  ✘ Есть упавшие тесты$(RESET)"; exit 1; fi
 
 # ─── Internal ─────────────────────────────────────────────────────────────────
 
