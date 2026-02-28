@@ -32,6 +32,7 @@ jobs:
               || echo "APP_DEBUG=0" >> .env
 
             echo "▶ [1/5] git pull..."
+
             git pull origin main
 
             echo "▶ [2/5] Сборка образа PHP..."
