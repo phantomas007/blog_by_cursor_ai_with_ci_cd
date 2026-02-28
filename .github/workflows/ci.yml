@@ -55,7 +55,11 @@ jobs:
 
       - name: Warmup DI container (required by PHPStan)
         working-directory: app
-        run: php bin/console cache:warmup --env=dev
+        env:
+          APP_ENV: dev
+          APP_DEBUG: "1"
+          DATABASE_URL: "mysql://ci_user:ci_password@127.0.0.1:3306/blog_ci?serverVersion=11.3.2-MariaDB&charset=utf8mb4"
+        run: php bin/console cache:warmup -vvv
 
       - name: PHP CS Fixer (dry-run)
         working-directory: app
