@@ -41,8 +41,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: app/vendor
-          key: composer-${{ hashFiles('app/composer.lock') }}
-          restore-keys: composer-
+          key: composer-v2-${{ hashFiles('app/composer.lock') }}
+          restore-keys: composer-v2-
 
       - name: Create .env.local
         working-directory: app
@@ -51,7 +51,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: app
-        run: composer install --no-interaction --prefer-dist
+        run: composer install --no-interaction --prefer-dist --no-scripts
 
       - name: Warmup DI container (required by PHPStan)
         working-directory: app
